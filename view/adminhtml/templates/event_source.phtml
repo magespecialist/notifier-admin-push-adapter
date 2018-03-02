@@ -1,0 +1,15 @@
+<?php
+/**
+ * Copyright © MageSpecialist - Skeeller srl. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \MSP\NotifierAdminPushAdapter\Block\EventSource $block */
+?>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout() ?>
+    }
+}
+</script>

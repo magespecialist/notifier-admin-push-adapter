@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © MageSpecialist - Skeeller srl. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="MSP\Notifier\Model\AdapterRepository">
+        <arguments>
+            <argument name="adapters" xsi:type="array">
+                <item name="admin_push" xsi:type="object">MSP\NotifierAdminPushAdapter\Model\Adapter\AdminPush</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="MSP\NotifierAdminPushAdapter\Config\Reader" type="Magento\Framework\Config\Reader\Filesystem">
+        <arguments>
+            <argument name="fileName" xsi:type="string">msp_notifier_admin_push_icons.xml</argument>
+            <argument name="converter"
+                      xsi:type="object">MSP\NotifierAdminPushAdapter\Model\Icon\Config\Converter</argument>
+            <argument name="schemaLocator"
+                      xsi:type="object">MSP\NotifierAdminPushAdapter\Model\Icon\Config\SchemaLocator</argument>
+            <argument name="idAttributes" xsi:type="array">
+                <item name="/config/icons/icon" xsi:type="string">id</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="MSP\NotifierAdminPushAdapter\Model\IconRepository">
+        <arguments>
+            <argument name="configReader" xsi:type="object">MSP\NotifierAdminPushAdapter\Config\Reader</argument>
+        </arguments>
+    </type>
+
+    <preference for="\MSP\NotifierAdminPushAdapterApi\Api\IconRepositoryInterface"
+                type="\MSP\NotifierAdminPushAdapter\Model\IconRepository"/>
+
+    <!-- AdminPush adapter -->
+    <virtualType name="MSP\NotifierAdminPushAdapter\Model\Adapter\AdminPush" type="MSP\Notifier\Model\Adapter">
+        <arguments>
+            <argument name="engine"
+                      xsi:type="object">MSP\NotifierAdminPushAdapter\Model\AdapterEngine\AdminPush</argument>
+            <argument name="validatorChain"
+                      xsi:type="object">MSP\NotifierAdminPushAdapter\Model\AdapterEngine\ValidatorChain\AdminPush</argument>
+            <argument name="code" xsi:type="string">admin_push</argument>
+            <argument name="name" xsi:type="string">Admin Push</argument>
+            <argument name="description" xsi:type="string">Admin User Push Notification</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- AdminPush validators -->
+    <virtualType name="MSP\NotifierAdminPushAdapter\Model\AdapterEngine\ParamsValidator\AdminPush\Required"
+                 type="MSP\Notifier\Model\AdapterEngine\ParamsValidator\Required">
+        <arguments>
+            <argument name="requiredParams" xsi:type="array">
+                <item name="users" xsi:type="string">users</item>
+                <item name="icon" xsi:type="string">icon</item>
+                <item name="mode" xsi:type="string">mode</item>
+                <item name="timeout" xsi:type="string">timeout</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- AdminPush validators pool -->
+    <virtualType name="MSP\NotifierAdminPushAdapter\Model\AdapterEngine\ValidatorChain\AdminPush"
+                 type="MSP\Notifier\Model\AdapterEngine\ValidatorChain">
+        <arguments>
+            <argument name="messageValidators" xsi:type="array">
+                <item name="required"
+                      xsi:type="object">MSP\Notifier\Model\AdapterEngine\MessageValidator\Required</item>
+            </argument>
+            <argument name="paramsValidators" xsi:type="array">
+                <item name="required"
+                      xsi:type="object">MSP\NotifierAdminPushAdapter\Model\AdapterEngine\ParamsValidator\AdminPush\Required</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <preference for="\MSP\NotifierAdminPushAdapterApi\Api\Data\AdminPushInterface"
+                type="\MSP\NotifierAdminPushAdapter\Model\AdminPush"/>
+    <preference for="\MSP\NotifierAdminPushAdapterApi\Api\AdminPushRepositoryInterface"
+                type="\MSP\NotifierAdminPushAdapter\Model\AdminPushRepository"/>
+    <preference for="\MSP\NotifierAdminPushAdapterApi\Api\AdminPushSearchResultsInterface"
+                type="\MSP\NotifierAdminPushAdapter\Model\AdminPushSearchResults"/>
+    <preference for="\MSP\NotifierAdminPushAdapter\Model\AdminPush\Command\GetNextMessageInterface"
+                type="\MSP\NotifierAdminPushAdapter\Model\AdminPush\Command\GetNextMessage"/>
+    <preference for="\MSP\NotifierAdminPushAdapter\Model\AdminPush\Command\GetInterface"
+                type="\MSP\NotifierAdminPushAdapter\Model\AdminPush\Command\Get"/>
+    <preference for="\MSP\NotifierAdminPushAdapter\Model\AdminPush\Command\SaveInterface"
+                type="\MSP\NotifierAdminPushAdapter\Model\AdminPush\Command\Save"/>
+    <preference for="\MSP\NotifierAdminPushAdapter\Model\AdminPush\Command\DeleteInterface"
+                type="\MSP\NotifierAdminPushAdapter\Model\AdminPush\Command\Delete"/>
+    <preference for="\MSP\NotifierAdminPushAdapter\Model\AdminPush\Command\GetListInterface"
+                type="\MSP\NotifierAdminPushAdapter\Model\AdminPush\Command\GetList"/>
+    <preference for="\MSP\NotifierAdminPushAdapter\Model\AdminPush\Command\ClearInterface"
+                type="\MSP\NotifierAdminPushAdapter\Model\AdminPush\Command\Clear"/>
+    <preference for="\MSP\NotifierAdminPushAdapter\Model\AdminPushExtensionLoaderInterface"
+                type="\MSP\NotifierAdminPushAdapter\Model\AdminPushExtensionLoader"/>
+</config>

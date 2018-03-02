@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageSpecialist - Skeeller srl. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:MSP_NotifierAdminPushAdapter:etc/msp_notifier_admin_push_icons.xsd">
+
+    <icons>
+        <icon
+                id="default"
+                level="success"
+                label="Default Icon"
+                icon="MSP_NotifierAdminPushAdapter::icons/default.png" />
+
+        <icon
+                id="success"
+                level="success"
+                label="Success Icon"
+                icon="MSP_NotifierAdminPushAdapter::icons/success.png" />
+
+        <icon
+                id="notice"
+                level="info"
+                label="Notice Icon"
+                icon="MSP_NotifierAdminPushAdapter::icons/notice.png" />
+
+        <icon
+                id="warning"
+                level="warning"
+                label="Warning Icon"
+                icon="MSP_NotifierAdminPushAdapter::icons/warning.png" />
+
+        <icon
+                id="danger"
+                level="error"
+                label="Danger Icon"
+                icon="MSP_NotifierAdminPushAdapter::icons/danger.png" />
+
+        <icon
+                id="security"
+                level="error"
+                label="Security Alert"
+                icon="MSP_NotifierAdminPushAdapter::icons/security.png" />
+    </icons>
+</config>
