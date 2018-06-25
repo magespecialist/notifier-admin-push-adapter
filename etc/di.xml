@@ -79,6 +79,18 @@
         </arguments>
     </virtualType>
 
+    <virtualType name="MSP\Notifier\Ui\DataProvider\Form\Channel\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="admin_push" xsi:type="array">
+                    <item name="class"
+                          xsi:type="string">MSP\NotifierAdminPushAdapter\Ui\DataProvider\Form\Channel\Modifier\AdminPush</item>
+                    <item name="sortOrder" xsi:type="number">1200</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
     <preference for="\MSP\NotifierAdminPushAdapterApi\Api\Data\AdminPushInterface"
                 type="\MSP\NotifierAdminPushAdapter\Model\AdminPush"/>
     <preference for="\MSP\NotifierAdminPushAdapterApi\Api\AdminPushRepositoryInterface"
