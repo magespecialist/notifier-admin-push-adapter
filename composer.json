@@ -2,7 +2,7 @@
     "name": "msp/module-notifier-admin-push-adapter",
     "description": "Admin push notification for MSP Notifier",
     "require": {
-        "php": "^7.0|^7.1|^7.2|^8.1",
+        "php": "^7.0|^7.1|^7.2|^8.1|^8.2",
         "magento/magento2-base": "^2.2|^2.3",
         "msp/module-notifier": "^0.1",
         "msp/module-notifier-admin-push-adapter-api": "^0.1",
